@@ -29,8 +29,8 @@ const Footer = () => {
         href="https://github.com/northcutted/excel2markdowntable"
         target="_blank"
       >
-        <GitHubIcon />
-        <pre>Version: {process.env.REACT_APP_VERSION} | Commit: {process.env.REACT_APP_COMMIT} | Build Date: {process.env.REACT_APP_BUILD_DATE}</pre>
+        <GitHubIcon sx={{marginRight: theme.spacing(1)}} />
+        <span>Version: {process.env.REACT_APP_VERSION}</span>
       </Link>
     </Box>
   );

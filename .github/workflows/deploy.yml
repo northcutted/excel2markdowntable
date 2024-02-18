@@ -34,10 +34,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set Version from package.json
         run: echo "REACT_APP_VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-      - name: Set Commit SHA
-        run: echo 'REACT_APP_COMMIT_SHA=${{ github.sha }}' >> $GITHUB_ENV
-      - name: Set Build Date
-        run: echo "REACT_APP_BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
       - name: Build
         run: npm run build
       - name: Upload artifact
