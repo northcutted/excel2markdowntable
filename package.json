@@ -1,6 +1,7 @@
 {
   "name": "excel2markdowntable",
   "version": "1.0.0",
+  "homepage": "https://northcutted.github.io/excel2markdowntable/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.3",
@@ -13,15 +14,16 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^9.0.4",
-    "semantic-release": "^21.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "react-scripts": "5.0.1",
     "remark-gfm": "^4.0.0",
+    "semantic-release": "^21.0.7",
     "styled-components": "^6.1.8"
   },
   "scripts": {
+
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,4 +47,5 @@
       "last 1 safari version"
     ]
   }
+
 }
