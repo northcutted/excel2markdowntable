@@ -9,7 +9,7 @@ const Footer = () => {
       sx={{
         marginTop: theme.spacing(4),
         padding: theme.spacing(2),
-        backgroundColor: theme.palette.background.paper, // or any color you prefer
+        backgroundColor: theme.palette.background.paper,
         color: theme.palette.secondary.main,
         textAlign: "center",
         width: "100%",
