@@ -113,7 +113,10 @@ const ExcelToMarkdown = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: {
+            xs: 'column', // Stack elements vertically on small screens
+            sm: 'row', // Use row layout on larger screens
+          },
           alignItems: "center",
           width: "100%",
           justifyContent: "space-between",
@@ -130,7 +133,8 @@ const ExcelToMarkdown = () => {
             onPaste={handlePaste}
             sx={{
               flexGrow: 1,
-              marginRight: theme.spacing(1),
+              marginRight: { xs: 0, sm: theme.spacing(1) }, // Remove margin on small screens
+              width: { xs: '100%', sm: 'auto' }, // Full width on small screens
             }}
           />
         </Tooltip>
@@ -148,7 +152,9 @@ const ExcelToMarkdown = () => {
               />
             }
             label="First row contains headers"
-            sx={{ margin: theme.spacing(2) }}
+            sx={{
+              margin: { xs: theme.spacing(1, 0), sm: theme.spacing(2) }, // Reduce margin on top and bottom for small screens
+            }}
           />
         </Tooltip>
       </Box>
