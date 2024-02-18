@@ -101,26 +101,29 @@ const ExcelToMarkdown = () => {
 
   return (
     <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "auto",
-        padding: theme.spacing(1),
-        width: "80%",
-      }}
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      margin: "auto",
+      padding: theme.spacing(1),
+      width: "80%",
+      '@media (max-width:600px)': {
+        width: "95%", // Increase width on small screens for better visibility
+      }
+    }}
     >
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: {
-            xs: 'column', // Stack elements vertically on small screens
-            sm: 'row', // Use row layout on larger screens
-          },
-          alignItems: "center",
-          width: "100%",
-          justifyContent: "space-between",
-        }}
+    sx={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      width: "100%",
+      justifyContent: "space-between",
+      '@media (max-width:600px)': {
+        flexDirection: "column", // Stack elements vertically on small screens
+      }
+    }}
       >
         <Tooltip
           title="Please do not paste sensitive data here. I don't collect any data, but you don't know that and can't trust me."
@@ -161,20 +164,23 @@ const ExcelToMarkdown = () => {
 
       {markdown && (
         <Box
-          sx={{
-            height: "auto",
-            bgcolor: theme.palette.background.paper.dark,
-            fontSize: "16px",
-            border: "1px solid #ccc",
-            borderRadius: theme.shape.borderRadius,
-            color: theme.palette.text.primary,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            margin: "auto",
-            padding: theme.spacing(2),
-            width: "100%",
-          }}
+        sx={{
+          height: "auto",
+          bgcolor: theme.palette.background.paper.dark,
+          fontSize: "16px",
+          border: "1px solid #ccc",
+          borderRadius: theme.shape.borderRadius,
+          color: theme.palette.text.primary,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          margin: "auto",
+          padding: theme.spacing(2),
+          width: "100%",
+          overflowX: "hidden",
+          overflowY: "auto", 
+          maxHeight: "400px",
+        }}
         >
           <h3>Markdown Output</h3>
           <Box
@@ -187,6 +193,9 @@ const ExcelToMarkdown = () => {
               borderRadius: 1,
               overflowX: "auto",
               whiteSpace: "pre-wrap",
+              maxHeight: "300px",
+              overflowY: "auto",
+              maxWidth: '100%',
             }}
           >
             {markdown}
@@ -197,7 +206,8 @@ const ExcelToMarkdown = () => {
               color="primary"
               sx={{
                 margin: theme.spacing(2),
-                padding: theme.spacing(1, 2),
+                padding: theme.spacing(1), // Adjust padding
+                minWidth: '120px',
                 fontSize: "16px",
                 textTransform: "uppercase",
                 backgroundColor: theme.palette.secondary.main,
