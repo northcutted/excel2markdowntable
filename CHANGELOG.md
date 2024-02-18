@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/northcutted/excel2markdowntable/compare/v1.1.0...v1.2.0) (2024-02-18)
+
+
+### Features
+
+* add ability to set first row headers ([9e6a4b8](https://github.com/northcutted/excel2markdowntable/commit/9e6a4b8cd24fee0212c3888c926f05192298cb9c))
+
 # [1.1.0](https://github.com/northcutted/excel2markdowntable/compare/v1.0.2...v1.1.0) (2024-02-18)
 
 
