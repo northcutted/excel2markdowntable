@@ -1,12 +1,11 @@
+import {useMemo, useState, createContext} from "react";
+import { ThemeProvider, StyledEngineProvider, createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import CssBaseline from "@mui/material/CssBaseline";
 import ExcelToMarkdown from "./Components/ExcelToMarkdown";
-import { ThemeProvider, StyledEngineProvider, createTheme, adaptV4Theme } from "@mui/material/styles";
+import { lightTheme, darkTheme } from "./Components/Styles";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import {useMemo, useState, createContext} from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import { lightTheme, darkTheme } from "./Components/Styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import "./App.css";
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {},
@@ -27,7 +26,7 @@ export default function App() {
   );
 
   const theme = useMemo(
-    () => createTheme(adaptV4Theme(mode === "light" ? lightTheme : darkTheme)),
+    () => createTheme(mode === "light" ? lightTheme : darkTheme),
     [mode]
   );
 
