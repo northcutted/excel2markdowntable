@@ -40,8 +40,6 @@ jobs:
         run: export BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       - name: Build
         run: REACT_APP_VERSION=$VERSION REACT_APP_COMMIT=$COMMIT_SHA REACT_APP_BUILD_DATE=$BUILD_DATE npm run build
-      - name: Build project
-        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
