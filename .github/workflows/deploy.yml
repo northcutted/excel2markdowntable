@@ -32,14 +32,12 @@ jobs:
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set Version
-        run: export VERSION=$(jq -r .version package.json)
-      - name: Set Commit SHA
-        run: export COMMIT_SHA=$(git rev-parse --short HEAD)
-      - name: Set Build Date
-        run: export BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       - name: Build
-        run: REACT_APP_VERSION=$VERSION REACT_APP_COMMIT=$COMMIT_SHA REACT_APP_BUILD_DATE=$BUILD_DATE npm run build
+        env:
+            REACT_APP_VERSION: $(jq -r .version package.json)
+            REACT_APP_COMMIT_SHA: ${{ github.sha }}
+            REACT_APP_BUILD_DATE: $(date -u +"%Y-%m-%dT%H:%M:%SZ")
+        run: npm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
