@@ -1,5 +1,9 @@
-import {useMemo, useState, createContext} from "react";
-import { ThemeProvider, StyledEngineProvider, createTheme } from "@mui/material/styles";
+import { useMemo, useState, createContext } from "react";
+import {
+  ThemeProvider,
+  StyledEngineProvider,
+  createTheme,
+} from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CssBaseline from "@mui/material/CssBaseline";
 import ExcelToMarkdown from "./Components/ExcelToMarkdown";
@@ -8,7 +12,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 export const ColorModeContext = createContext({
-  toggleColorMode: () => {},
+  toggleColorMode: () => { },
 });
 
 export default function App() {

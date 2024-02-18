@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Button, Tooltip, Snackbar } from "@mui/material";
+import {
+  Button,
+  Tooltip,
+  Snackbar,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import FileCopyOutlinedIcon from "@mui/icons-material/FileCopyOutlined";
 import { useTheme } from "@mui/material/styles";
@@ -10,34 +16,54 @@ const ExcelToMarkdown = () => {
   const theme = useTheme();
   const [markdown, setMarkdown] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [hasHeaders, setHasHeaders] = useState(true);
 
   const handlePaste = (event) => {
     event.preventDefault();
     const pasteData = (event.clipboardData || window.clipboardData).getData(
       "text"
     );
-    setMarkdown(convertToMarkdown(pasteData));
+    setMarkdown(convertToMarkdown(pasteData, hasHeaders));
   };
 
-  const convertToMarkdown = (pasteData) => {
+  const convertToMarkdown = (pasteData, includeHeaders) => {
     const delimiter = pasteData.indexOf("\t") !== -1 ? "\t" : ",";
-    const rows = pasteData.split("\n").filter((row) => row.trim());
-    const headerCells = rows[0].split(delimiter).length;
-    const headerSeparator = `| ${Array(headerCells).fill("---").join(" | ")} |`;
-    const markdownRows = rows.map((row) => {
-      const cells = parseCSVRow(row, delimiter);
+    let rows = pasteData.split("\n").filter((row) => row.trim());
+    const columns = rows.map((row) => parseCSVRow(row, delimiter));
+
+    const columnWidths = columns[0].map((col, i) =>
+      Math.max(...columns.map((row) => row[i]?.length || 0))
+    );
+
+    if (!includeHeaders) {
+      const headerRow = columnWidths.map((width) => {
+        const sideSpaces = Math.max(0, Math.floor((width - 1) / 2));
+        return (
+          " ".repeat(sideSpaces) + "x" + " ".repeat(width - sideSpaces - 1)
+        );
+      });
+      columns.unshift(headerRow);
+    }
+
+    const padCell = (cell, index) => cell.padEnd(columnWidths[index], " ");
+
+    let markdownRows = columns.map((row) => {
+      const cells = row.map(padCell);
       return `| ${cells.join(" | ")} |`;
     });
+
+    const headerSeparator = `| ${columnWidths
+      .map((width) => "-".repeat(width))
+      .join(" | ")} |`;
     markdownRows.splice(1, 0, headerSeparator);
     return markdownRows.join("\n");
   };
 
-  const parseCSVRow = (row, delimiter) => {
-    // If the delimiter is a tab (\t), we can split directly since tabs won't be found in the cell content
-    if (delimiter === "\t") {
-      return row.split(delimiter).map((cell) => cell.trim());
-    }
+  const handleSwitchChange = (event) => {
+    setHasHeaders(event.target.checked);
+  };
 
+  const parseCSVRow = (row, delimiter) => {
     // CSV parsing logic for comma-delimited data
     const cells = [];
     let cellBuffer = "";
@@ -81,26 +107,51 @@ const ExcelToMarkdown = () => {
         alignItems: "center",
         margin: "auto",
         padding: theme.spacing(1),
-        width: "75%",
+        width: "80%",
       }}
     >
-      <TextField
-        placeholder="Paste your Excel/CSV data here"
-        variant="outlined"
-        margin="normal"
-        onPaste={handlePaste}
+      <Box
         sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
           width: "100%",
-          height: "auto",
-          bgcolor: theme.palette.background.paper,
-          padding: theme.spacing(1),
-          fontSize: "16px",
-          border: "1px solid #ccc",
-          borderRadius: theme.shape.borderRadius,
-          color: theme.palette.text.primary,
+          justifyContent: "space-between",
         }}
-        rows={10}
-      />
+      >
+        <Tooltip
+          title="Please do not paste sensitive data here. I don't collect any data, but you don't know that and can't trust me."
+          placement="top"
+        >
+          <TextField
+            placeholder="Paste your Excel/CSV data here"
+            variant="outlined"
+            margin="normal"
+            onPaste={handlePaste}
+            sx={{
+              flexGrow: 1,
+              marginRight: theme.spacing(1),
+            }}
+          />
+        </Tooltip>
+        <Tooltip
+          title="When set to false, will create headers in the first row with the value of x."
+          placement="top"
+        >
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={hasHeaders}
+                onChange={handleSwitchChange}
+                name="hasHeadersCheckbox"
+                color="secondary"
+              />
+            }
+            label="First row contains headers"
+            sx={{ margin: theme.spacing(2) }}
+          />
+        </Tooltip>
+      </Box>
 
       {markdown && (
         <Box
@@ -116,12 +167,24 @@ const ExcelToMarkdown = () => {
             alignItems: "center",
             margin: "auto",
             padding: theme.spacing(2),
-            width: "75%",
+            width: "100%",
           }}
         >
-          <p>Markdown Output</p>
-          <pre>{markdown}</pre>
-
+          <h3>Markdown Output</h3>
+          <Box
+            component="pre"
+            sx={{
+              backgroundColor: "background.paper",
+              border: 1,
+              borderColor: "divider",
+              padding: 2,
+              borderRadius: 1,
+              overflowX: "auto",
+              whiteSpace: "pre-wrap",
+            }}
+          >
+            {markdown}
+          </Box>
           <Tooltip title="Copy to Clipboard" placement="top">
             <Button
               variant="contained"
@@ -137,7 +200,7 @@ const ExcelToMarkdown = () => {
                 cursor: "pointer",
                 boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                 "&:hover": {
-                  backgroundColor: theme.palette.primary.dark,
+                  backgroundColor: theme.palette.secondary.dark,
                 },
               }}
               onClick={copyToClipboard}
@@ -156,7 +219,7 @@ const ExcelToMarkdown = () => {
         onClose={() => setSnackbarOpen(false)}
       />
 
-      {markdown && <h2>Rendered Markdown Conversion Preview:</h2> }
+      {markdown && <h3>Rendered Markdown Conversion Preview:</h3>}
       <MarkdownPreview markdown={markdown} />
     </Box>
   );

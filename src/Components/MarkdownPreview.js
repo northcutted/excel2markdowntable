@@ -1,14 +1,14 @@
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import { useTheme } from '@mui/material/styles';
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { useTheme } from "@mui/material/styles";
 
 const MarkdownPreview = ({ markdown }) => {
   const theme = useTheme();
 
   // Define inline styles
   const tableStyle = {
-    borderCollapse: 'collapse',
-    width: '100%',
+    borderCollapse: "collapse",
+    width: "100%",
     marginTop: theme.spacing(2),
   };
 
@@ -21,12 +21,12 @@ const MarkdownPreview = ({ markdown }) => {
   const tdStyle = {
     border: `1px solid ${theme.palette.divider}`,
     padding: theme.spacing(1),
-    textAlign: 'left',
+    textAlign: "left",
   };
 
   const trStyle = (index) => ({
-    backgroundColor: index % 2 ? theme.palette.action.hover : 'none',
-    '&:hover': {
+    backgroundColor: index % 2 ? theme.palette.action.hover : "none",
+    "&:hover": {
       backgroundColor: theme.palette.action.selected,
     },
   });
@@ -38,7 +38,13 @@ const MarkdownPreview = ({ markdown }) => {
     tr: ({ node, index, ...props }) => <tr style={trStyle(index)} {...props} />,
   };
 
-  return <Markdown children={markdown} remarkPlugins={[remarkGfm]} components={components} />;
+  return (
+    <Markdown
+      children={markdown}
+      remarkPlugins={[remarkGfm]}
+      components={components}
+    />
+  );
 };
 
 export default MarkdownPreview;

@@ -1,5 +1,7 @@
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/system/Box";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import Link from "@mui/material/Link";
 
 const Footer = () => {
   const theme = useTheme();
@@ -13,14 +15,22 @@ const Footer = () => {
         color: theme.palette.secondary.main,
         textAlign: "center",
         width: "100%",
-        position: "sticky",
-        bottom: 0,
+        position: "absolute",
         left: 0,
+        bottom: 0,
+        right: 0,
       }}
     >
       Created by <a href="https://northcutted.github.io/resume/">northcutted</a>{" "}
       <strike>with ❤️</strike> out of pure frustration with GitLab's editor no
-      longer doing this for me | {new Date().getFullYear()}
+      longer doing this for me
+      <br></br>
+      <Link
+        href="https://github.com/northcutted/excel2markdowntable"
+        target="_blank"
+      >
+        <GitHubIcon />
+      </Link>
     </Box>
   );
 };
