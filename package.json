@@ -1,6 +1,6 @@
 {
   "name": "excel2markdowntable",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "homepage": "https://northcutted.github.io/excel2markdowntable/",
   "private": true,
   "dependencies": {
@@ -23,7 +23,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
