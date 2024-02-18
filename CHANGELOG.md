@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/northcutted/excel2markdowntable/compare/v1.3.1...v1.3.2) (2024-02-18)
+
+
+### Bug Fixes
+
+* fix mobile layout issues ([3fda002](https://github.com/northcutted/excel2markdowntable/commit/3fda0025559539e44836ed935b7fd8f9329dfe88))
+
 ## [1.3.1](https://github.com/northcutted/excel2markdowntable/compare/v1.3.0...v1.3.1) (2024-02-18)
 
 
