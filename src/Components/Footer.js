@@ -30,6 +30,7 @@ const Footer = () => {
         target="_blank"
       >
         <GitHubIcon />
+        <pre>Version: {process.env.REACT_APP_VERSION} | Commit: {process.env.REACT_APP_COMMIT} | Build Date: {process.env.REACT_APP_BUILD_DATE}</pre>
       </Link>
     </Box>
   );
