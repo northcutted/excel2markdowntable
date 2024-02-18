@@ -35,7 +35,7 @@ jobs:
       - name: Set Version
         run: export VERSION=$(jq -r .version package.json)
       - name: Set Commit SHA
-        run: export "COMMIT_SHA=$(git rev-parse --short HEAD)
+        run: export COMMIT_SHA=$(git rev-parse --short HEAD)
       - name: Set Build Date
         run: export BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       - name: Build
