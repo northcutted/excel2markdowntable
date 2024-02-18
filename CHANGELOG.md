@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/northcutted/excel2markdowntable/compare/v1.0.2...v1.1.0) (2024-02-18)
+
+
+### Features
+
+* migrate to new theme engine ([6b74f8d](https://github.com/northcutted/excel2markdowntable/commit/6b74f8d54f3590034ab11862e7a5f4f806513123))
+
 ## [1.0.2](https://github.com/northcutted/excel2markdowntable/compare/v1.0.1...v1.0.2) (2024-02-18)
 
 
