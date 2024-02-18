@@ -23,23 +23,21 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm install
-      - name: Install Sem-Rel dependencies
         run: npm install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/github
       - name: Semantic Release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Set Version
-        run: echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+        run: export VERSION=$(jq -r .version package.json)
       - name: Set Commit SHA
-        run: echo "COMMIT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: export "COMMIT_SHA=$(git rev-parse --short HEAD)
       - name: Set Build Date
-        run: echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+        run: export BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
       - name: Build
         run: REACT_APP_VERSION=$VERSION REACT_APP_COMMIT=$COMMIT_SHA REACT_APP_BUILD_DATE=$BUILD_DATE npm run build
       - name: Build project
