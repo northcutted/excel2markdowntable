@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/northcutted/excel2markdowntable/compare/v1.3.2...v1.3.3) (2024-02-19)
+
+
+### Bug Fixes
+
+* tooltip text ([951a624](https://github.com/northcutted/excel2markdowntable/commit/951a6245881abb824dcd2b1976f2b0f918ee4333))
+
 ## [1.3.2](https://github.com/northcutted/excel2markdowntable/compare/v1.3.1...v1.3.2) (2024-02-18)
 
 
