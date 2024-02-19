@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/northcutted/excel2markdowntable/compare/v1.3.3...v1.4.0) (2024-02-19)
+
+
+### Features
+
+* migrate to typescript ([98880fe](https://github.com/northcutted/excel2markdowntable/commit/98880fe1186bfbcc302e045761ededc107c40fcc))
+
 ## [1.3.3](https://github.com/northcutted/excel2markdowntable/compare/v1.3.2...v1.3.3) (2024-02-19)
 
 
