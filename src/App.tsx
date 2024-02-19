@@ -1,4 +1,4 @@
-import { useMemo, useState, createContext } from "react";
+import React, { FC, useMemo, useState, createContext } from "react";
 import {
   ThemeProvider,
   StyledEngineProvider,
@@ -11,17 +11,30 @@ import { lightTheme, darkTheme } from "./Components/Styles";
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
-export const ColorModeContext = createContext({
+interface ColorModeContextProps {
+  toggleColorMode: () => void;
+}
+
+export const ColorModeContext = createContext<ColorModeContextProps>({
   toggleColorMode: () => { },
 });
 
-export default function App() {
-  const [mode, setMode] = useState(
+/**
+ * The main component of the application.
+ */
+const App: FC = () => {
+  const [mode, setMode] = useState<string>(
     useMediaQuery("(prefers-color-scheme: dark)") ? "dark" : "light"
   );
 
-  const colorMode = useMemo(
+  /**
+   * The color mode context value.
+   */
+  const colorMode = useMemo<ColorModeContextProps>(
     () => ({
+      /**
+       * Toggles the color mode between light and dark.
+       */
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
@@ -29,6 +42,9 @@ export default function App() {
     []
   );
 
+  /**
+   * The theme based on the current color mode.
+   */
   const theme = useMemo(
     () => createTheme(mode === "light" ? lightTheme : darkTheme),
     [mode]
@@ -46,4 +62,6 @@ export default function App() {
       </StyledEngineProvider>
     </ColorModeContext.Provider>
   );
-}
+};
+
+export default App;

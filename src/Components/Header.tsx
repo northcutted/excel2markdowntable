@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,9 +11,16 @@ import { ColorModeContext } from "../App";
 import Logo from "../assets/logo.png";
 import Box from "@mui/material/Box";
 
-export default function Header() {
+interface HeaderProps { }
+
+/**
+ * Header component for the application.
+ * @component
+ */
+const Header: React.FC<HeaderProps> = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
+
   return (
     <AppBar
       position="static"
@@ -39,20 +46,22 @@ export default function Header() {
           title="Light/Dark mode toggle. Defaults to system preference."
           placement="top"
         >
-        <IconButton
-          sx={{ ml: 1 }}
-          onClick={colorMode.toggleColorMode}
-          color="inherit"
-          size="large"
-        >
-          {theme.palette.mode === "dark" ? (
-            <Brightness7Icon />
-          ) : (
-            <Brightness4Icon />
-          )}
-        </IconButton>
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit"
+            size="large"
+          >
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
+          </IconButton>
         </Tooltip>
       </Toolbar>
     </AppBar>
   );
-}
+};
+
+export default Header;

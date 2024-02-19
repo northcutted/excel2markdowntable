@@ -1,10 +1,15 @@
-import { useTheme } from "@mui/material/styles";
+import { useTheme, Theme } from "@mui/material/styles";
 import Box from "@mui/system/Box";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import Link from "@mui/material/Link";
 
-const Footer = () => {
-  const theme = useTheme();
+/**
+ * Footer component.
+ * 
+ * @returns The rendered Footer component.
+ */
+const Footer: React.FC = () => {
+  const theme: Theme = useTheme();
 
   return (
     <Box
@@ -22,17 +27,18 @@ const Footer = () => {
       }}
     >
       Created by <a href="https://northcutted.github.io/resume/">northcutted</a>{" "}
-      <strike>with ❤️</strike> out of pure frustration with GitLab's editor no
+      <s>with ❤️</s> out of pure frustration with GitLab's editor no
       longer doing this for me
       <br></br>
       <Link
         href="https://github.com/northcutted/excel2markdowntable"
         target="_blank"
       >
-        <GitHubIcon sx={{marginRight: theme.spacing(1)}} />
+        <GitHubIcon sx={{ marginRight: theme.spacing(1) }} />
         <span>Version: {process.env.REACT_APP_VERSION}</span>
       </Link>
     </Box>
   );
 };
+
 export default Footer;
