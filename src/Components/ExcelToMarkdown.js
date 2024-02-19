@@ -126,7 +126,7 @@ const ExcelToMarkdown = () => {
     }}
       >
         <Tooltip
-          title="Please do not paste sensitive data here. I don't collect any data, but you don't know that and can't trust me."
+          title="Please do not paste sensitive data here. I don't collect any data, but you don't know that and can't you trust me."
           placement="top"
         >
           <TextField
